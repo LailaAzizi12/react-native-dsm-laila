@@ -3,7 +3,7 @@ import { FlatList, View, Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { List, Divider } from "react-native-paper";
 
-function Calendario({ excursiones }) {
+function Calendario({ excursiones, onPress }) {
   const renderCalendarioItem = ({ item }) => {
     return (
       <View>
@@ -11,6 +11,7 @@ function Calendario({ excursiones }) {
           title={item.nombre}
           description={item.descripcion}
           titleNumberOfLines={0}
+          onPress={() => onPress(item.id)}
           descriptionNumberOfLines={6}
           left={(props) => (
             <Image
