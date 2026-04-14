@@ -1,9 +1,9 @@
-import { Component } from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
-import { Card, Text } from 'react-native-paper';
-import { EXCURSIONES } from '../comun/excursiones';
-import { CABECERAS } from '../comun/cabeceras';
-import { ACTIVIDADES } from '../comun/actividades';
+import { Component } from "react";
+import { ScrollView, View, StyleSheet, ImageBackground } from "react-native";
+import { Card, Text } from "react-native-paper";
+import { EXCURSIONES } from "../comun/excursiones";
+import { CABECERAS } from "../comun/cabeceras";
+import { ACTIVIDADES } from "../comun/actividades";
 
 function RenderItem({ item }) {
   if (!item) {
@@ -12,19 +12,19 @@ function RenderItem({ item }) {
 
   return (
     <Card style={styles.card}>
-      <Card.Title
-        title={item.nombre}
-        titleStyle={styles.titulo}
-        style={styles.cardTitle}
-      />
-      <Card.Cover
-        source={require('./imagenes/40Años.png')}
+      <ImageBackground
+        source={require("./imagenes/40Años.png")}
         style={styles.image}
-      />
+      >
+        <Card.Title
+          title={item.nombre}
+          titleStyle={styles.titulo}
+          style={styles.cardTitle}
+        />
+      </ImageBackground>
+
       <Card.Content>
-        <Text style={styles.descripcion}>
-          {item.descripcion}
-        </Text>
+        <Text style={styles.descripcion}>{item.descripcion}</Text>
       </Card.Content>
     </Card>
   );
@@ -43,9 +43,15 @@ class Home extends Component {
   render() {
     return (
       <ScrollView>
-        <RenderItem item={this.state.cabeceras.filter((item) => item.destacado)[0]} />
-        <RenderItem item={this.state.excursiones.filter((item) => item.destacado)[0]} />
-        <RenderItem item={this.state.actividades.filter((item) => item.destacado)[0]} />
+        <RenderItem
+          item={this.state.cabeceras.filter((item) => item.destacado)[0]}
+        />
+        <RenderItem
+          item={this.state.excursiones.filter((item) => item.destacado)[0]}
+        />
+        <RenderItem
+          item={this.state.actividades.filter((item) => item.destacado)[0]}
+        />
       </ScrollView>
     );
   }
@@ -56,6 +62,7 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   image: {
+    height: 150,
     marginHorizontal: 0,
   },
   descripcion: {
@@ -63,10 +70,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   titulo: {
-    textAlign: 'center',
+    marginTop: 20,
+    color: "chocolate",
+    fontWeight: "bold",
+    fontSize: 25,
+    textAlign: "center",
   },
   cardTitle: {
-    alignItems: 'center',
+    alignItems: "center",
   },
 });
 
