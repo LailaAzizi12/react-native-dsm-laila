@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { List, Divider, Card, Text } from "react-native-paper";
 import { ACTIVIDADES } from "../comun/actividades";
 import { HISTORIA } from "../comun/historia";
+import { baseUrl } from "../comun/comun";
 
 function RenderHistoria({ item }) {
   if (!item) {
@@ -49,7 +50,7 @@ class QuienesSomos extends Component {
             descriptionNumberOfLines={6}
             left={(props) => (
               <Image
-                source={require("./imagenes/40Años.png")}
+                source={{ uri: baseUrl + item.imagen }}
                 style={[props.style, styles.imagen]}
                 resizeMode="cover"
               />

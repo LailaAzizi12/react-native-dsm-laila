@@ -4,6 +4,7 @@ import { Card, Text } from "react-native-paper";
 import { EXCURSIONES } from "../comun/excursiones";
 import { CABECERAS } from "../comun/cabeceras";
 import { ACTIVIDADES } from "../comun/actividades";
+import { baseUrl } from "../comun/comun";
 
 function RenderItem({ item }) {
   if (!item) {
@@ -13,7 +14,7 @@ function RenderItem({ item }) {
   return (
     <Card style={styles.card}>
       <ImageBackground
-        source={require("./imagenes/40Años.png")}
+        source={{ uri: baseUrl + item.imagen }}
         style={styles.image}
       >
         <Card.Title
@@ -64,17 +65,20 @@ const styles = StyleSheet.create({
   image: {
     height: 150,
     marginHorizontal: 0,
+    justifyContent: "center",
+    alignItems: "center",
   },
   descripcion: {
     marginTop: 20,
     marginBottom: 20,
   },
   titulo: {
-    marginTop: 20,
     color: "chocolate",
     fontWeight: "bold",
     fontSize: 25,
-    textAlign: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
+    padding: 10,
+    alignSelf: "center",
   },
   cardTitle: {
     alignItems: "center",

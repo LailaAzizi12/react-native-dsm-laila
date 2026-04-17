@@ -23,6 +23,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Home from "./HomeComponent";
 import Contacto from "./ContactoComponent";
 import QuienesSomos from "./QuienesSomosComponent";
+import { colorGaztaroaClaro, colorGaztaroaOscuro } from "../comun/comun";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -88,7 +89,7 @@ class Campobase extends Component {
         initialRouteName="Home"
         screenOptions={{
           headerTintColor: "#fff",
-          headerStyle: { backgroundColor: "#015afc" },
+          headerStyle: { backgroundColor: colorGaztaroaOscuro },
           headerTitleStyle: { color: "#fff" },
         }}
       >
@@ -109,7 +110,7 @@ class Campobase extends Component {
         initialRouteName="Calendario"
         screenOptions={{
           headerTintColor: "#fff",
-          headerStyle: { backgroundColor: "#015afc" },
+          headerStyle: { backgroundColor: colorGaztaroaOscuro },
           headerTitleStyle: { color: "#fff" },
         }}
       >
@@ -145,7 +146,7 @@ class Campobase extends Component {
         initialRouteName="Contacto"
         screenOptions={{
           headerTintColor: "#fff",
-          headerStyle: { backgroundColor: "#015afc" },
+          headerStyle: { backgroundColor: colorGaztaroaOscuro },
           headerTitleStyle: { color: "#fff" },
         }}
       >
@@ -166,7 +167,7 @@ class Campobase extends Component {
         initialRouteName="QuienesSomos"
         screenOptions={{
           headerTintColor: "#fff",
-          headerStyle: { backgroundColor: "#015afc" },
+          headerStyle: { backgroundColor: colorGaztaroaOscuro },
           headerTitleStyle: { color: "#fff" },
         }}
       >
@@ -189,7 +190,7 @@ class Campobase extends Component {
         screenOptions={{
           headerShown: false,
           drawerStyle: {
-            backgroundColor: "#c2d3da",
+            backgroundColor: colorGaztaroaClaro,
           },
         }}
       >
@@ -266,7 +267,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   drawerHeader: {
-    backgroundColor: "#015afc",
+    backgroundColor: colorGaztaroaOscuro,
     height: 100,
     flexDirection: "row",
     alignItems: "center",
