@@ -1,0 +1,236 @@
+import * as ActionTypes from "./ActionTypes";
+import { baseUrl } from "../comun/comun";
+
+export const fetchComentarios = () => (dispatch) => {
+  return fetch(baseUrl + "comentarios")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText,
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      },
+    )
+    .then((response) => response.json())
+    .then((comentarios) => dispatch(addComentarios(comentarios)))
+    .catch((error) => dispatch(comentariosFailed(error.message)));
+};
+
+export const comentariosFailed = (errmess) => ({
+  type: ActionTypes.COMENTARIOS_FAILED,
+  payload: errmess,
+});
+
+export const addComentarios = (comentarios) => ({
+  type: ActionTypes.ADD_COMENTARIOS,
+  payload: comentarios,
+});
+
+export const fetchExcursiones = () => (dispatch) => {
+  dispatch(excursionesLoading());
+
+  return fetch(baseUrl + "excursiones")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText,
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      },
+    )
+    .then((response) => response.json())
+    .then((excursiones) => dispatch(addExcursiones(excursiones)))
+    .catch((error) => dispatch(excursionesFailed(error.message)));
+};
+
+export const excursionesLoading = () => ({
+  type: ActionTypes.EXCURSIONES_LOADING,
+});
+
+export const excursionesFailed = (errmess) => ({
+  type: ActionTypes.EXCURSIONES_FAILED,
+  payload: errmess,
+});
+
+export const addExcursiones = (excursiones) => ({
+  type: ActionTypes.ADD_EXCURSIONES,
+  payload: excursiones,
+});
+
+export const fetchCabeceras = () => (dispatch) => {
+  dispatch(cabecerasLoading());
+
+  return fetch(baseUrl + "cabeceras")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText,
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      },
+    )
+    .then((response) => response.json())
+    .then((cabeceras) => dispatch(addCabeceras(cabeceras)))
+    .catch((error) => dispatch(cabecerasFailed(error.message)));
+};
+
+export const cabecerasLoading = () => ({
+  type: ActionTypes.CABECERAS_LOADING,
+});
+
+export const cabecerasFailed = (errmess) => ({
+  type: ActionTypes.CABECERAS_FAILED,
+  payload: errmess,
+});
+
+export const addCabeceras = (cabeceras) => ({
+  type: ActionTypes.ADD_CABECERAS,
+  payload: cabeceras,
+});
+
+export const fetchActividades = () => (dispatch) => {
+  dispatch(actividadesLoading());
+
+  return fetch(baseUrl + "actividades")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText,
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      },
+    )
+    .then((response) => response.json())
+    .then((actividades) => dispatch(addActividades(actividades)))
+    .catch((error) => dispatch(actividadesFailed(error.message)));
+};
+
+export const actividadesLoading = () => ({
+  type: ActionTypes.ACTIVIDADES_LOADING,
+});
+
+export const actividadesFailed = (errmess) => ({
+  type: ActionTypes.ACTIVIDADES_FAILED,
+  payload: errmess,
+});
+
+export const addActividades = (actividades) => ({
+  type: ActionTypes.ADD_ACTIVIDADES,
+  payload: actividades,
+});
+
+export const fetchHistoria = () => (dispatch) => {
+  dispatch(historiaLoading());
+
+  return fetch(baseUrl + "historia")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText,
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      },
+    )
+    .then((response) => response.json())
+    .then((historia) => dispatch(addHistoria(historia)))
+    .catch((error) => dispatch(historiaFailed(error.message)));
+};
+
+export const historiaLoading = () => ({
+  type: ActionTypes.HISTORIA_LOADING,
+});
+
+export const historiaFailed = (errmess) => ({
+  type: ActionTypes.HISTORIA_FAILED,
+  payload: errmess,
+});
+
+export const addHistoria = (historia) => ({
+  type: ActionTypes.ADD_HISTORIA,
+  payload: historia,
+});
+
+export const fetchContacto = () => (dispatch) => {
+  dispatch(contactoLoading());
+
+  return fetch(baseUrl + "contacto")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText,
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      },
+    )
+    .then((response) => response.json())
+    .then((contacto) => dispatch(addContacto(contacto)))
+    .catch((error) => dispatch(contactoFailed(error.message)));
+};
+
+export const contactoLoading = () => ({
+  type: ActionTypes.CONTACTO_LOADING,
+});
+
+export const contactoFailed = (errmess) => ({
+  type: ActionTypes.CONTACTO_FAILED,
+  payload: errmess,
+});
+
+export const addContacto = (contacto) => ({
+  type: ActionTypes.ADD_CONTACTO,
+  payload: contacto,
+});

@@ -1,7 +1,6 @@
 import { Component } from "react";
 import Calendario from "./CalendarioComponent";
 import DetalleExcursion from "./DetalleExcursionComponent";
-import { EXCURSIONES } from "../comun/excursiones";
 import {
   Platform,
   View,
@@ -24,9 +23,33 @@ import Home from "./HomeComponent";
 import Contacto from "./ContactoComponent";
 import QuienesSomos from "./QuienesSomosComponent";
 import { colorGaztaroaClaro, colorGaztaroaOscuro } from "../comun/comun";
+import { connect } from "react-redux";
+import {
+  fetchExcursiones,
+  fetchComentarios,
+  fetchCabeceras,
+  fetchActividades,
+  fetchHistoria,
+  fetchContacto,
+} from "../redux/ActionCreators";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
+
+const mapStateToProps = (state) => {
+  return {
+    excursiones: state.excursiones,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchExcursiones: () => dispatch(fetchExcursiones()),
+  fetchComentarios: () => dispatch(fetchComentarios()),
+  fetchCabeceras: () => dispatch(fetchCabeceras()),
+  fetchActividades: () => dispatch(fetchActividades()),
+  fetchContacto: () => dispatch(fetchContacto()),
+  fetchHistoria: () => dispatch(fetchHistoria()),
+});
 
 function BotonMenu(props) {
   return (
@@ -67,11 +90,13 @@ function CustomDrawerContent(props) {
 }
 
 class Campobase extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      excursiones: EXCURSIONES,
-    };
+  componentDidMount() {
+    this.props.fetchExcursiones();
+    this.props.fetchComentarios();
+    this.props.fetchCabeceras();
+    this.props.fetchActividades();
+    this.props.fetchHistoria();
+    this.props.fetchContacto();
   }
 
   menuHeaderOptions = (title, navigation) => ({
@@ -121,7 +146,10 @@ class Campobase extends Component {
           }
         >
           {(props) => (
-            <Calendario {...props} excursiones={this.state.excursiones} />
+            <Calendario
+              {...props}
+              excursiones={this.props.excursiones.excursiones}
+            />
           )}
         </Stack.Screen>
 
@@ -133,7 +161,10 @@ class Campobase extends Component {
           }}
         >
           {(props) => (
-            <DetalleExcursion {...props} excursiones={this.state.excursiones} />
+            <DetalleExcursion
+              {...props}
+              excursiones={this.props.excursiones.excursiones}
+            />
           )}
         </Stack.Screen>
       </Stack.Navigator>
@@ -294,4 +325,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Campobase;
+export default connect(mapStateToProps, mapDispatchToProps)(Campobase);

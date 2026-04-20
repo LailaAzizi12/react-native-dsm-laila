@@ -1,7 +1,14 @@
 import { Component } from "react";
 import { ScrollView, View, StyleSheet } from "react-native";
 import { Card, Text, Divider } from "react-native-paper";
-import { CONTACTO } from "../comun/contacto";
+import { connect } from "react-redux";
+import { contacto } from "../redux/contacto";
+
+const mapStateToProps = (state) => {
+  return {
+    contacto: state.contacto,
+  };
+};
 
 function RenderItem({ item }) {
   if (!item) {
@@ -26,17 +33,10 @@ function RenderItem({ item }) {
 }
 
 class Contacto extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      contacto: CONTACTO,
-    };
-  }
-
   render() {
     return (
       <ScrollView>
-        <RenderItem item={this.state.contacto[0]} />
+        <RenderItem item={this.props.contacto.contacto[0]} />
       </ScrollView>
     );
   }
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Contacto;
+export default connect(mapStateToProps)(Contacto);
