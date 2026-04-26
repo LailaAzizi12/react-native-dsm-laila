@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { List, Divider, Card, Text } from "react-native-paper";
 import { baseUrl } from "../comun/comun";
 import { connect } from "react-redux";
+import { IndicadorActividad } from "./IndicadorActividadComponent";
 
 const mapStateToProps = (state) => {
   return {
@@ -32,8 +33,16 @@ function RenderHistoria({ item }) {
   );
 }
 
-function Historia({ item }) {
-  return <RenderHistoria item={item} />;
+function Historia({ item, isLoading, errMess }) {
+  return isLoading ? (
+    <IndicadorActividad />
+  ) : errMess ? (
+    <View>
+      <Text>{errMess}</Text>
+    </View>
+  ) : (
+    <RenderHistoria item={item} />
+  );
 }
 
 class QuienesSomos extends Component {
@@ -62,7 +71,11 @@ class QuienesSomos extends Component {
 
     return (
       <ScrollView>
-        <Historia item={this.props.historia.historia[0]} />
+        <Historia
+          item={this.props.historia.historia[0]}
+          isLoading={this.props.historia.isLoading}
+          errMess={this.props.historia.errMess}
+        />
         <Card style={styles.card}>
           <Card.Title
             title="Actividades y recursos"
@@ -70,13 +83,20 @@ class QuienesSomos extends Component {
             style={styles.cardTitle}
           />
           <Divider style={styles.lineaDivision} />
+
           <Card.Content style={styles.contenido}>
-            <FlatList
-              data={this.props.actividades.actividades}
-              renderItem={renderActividadesItem}
-              keyExtractor={(item) => item.id.toString()}
-              scrollEnabled={false}
-            />
+            {this.props.actividades.isLoading ? (
+              <IndicadorActividad />
+            ) : this.props.actividades.errMess ? (
+              <Text>{this.props.actividades.errMess}</Text>
+            ) : (
+              <FlatList
+                data={this.props.actividades.actividades}
+                renderItem={renderActividadesItem}
+                keyExtractor={(item) => item.id.toString()}
+                scrollEnabled={false}
+              />
+            )}
           </Card.Content>
         </Card>
       </ScrollView>

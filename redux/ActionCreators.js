@@ -234,3 +234,13 @@ export const addContacto = (contacto) => ({
   type: ActionTypes.ADD_CONTACTO,
   payload: contacto,
 });
+
+export const postFavorito = (excursionId) => (dispatch) => {
+  setTimeout(() => {
+    dispatch(addFavorito(excursionId));
+  }, 2000);
+};
+export const addFavorito = (excursionId) => ({
+  type: ActionTypes.ADD_FAVORITO,
+  payload: excursionId,
+});

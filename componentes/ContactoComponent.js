@@ -3,6 +3,7 @@ import { ScrollView, View, StyleSheet } from "react-native";
 import { Card, Text, Divider } from "react-native-paper";
 import { connect } from "react-redux";
 import { contacto } from "../redux/contacto";
+import { IndicadorActividad } from "./IndicadorActividadComponent";
 
 const mapStateToProps = (state) => {
   return {
@@ -10,33 +11,49 @@ const mapStateToProps = (state) => {
   };
 };
 
-function RenderItem({ item }) {
-  if (!item) {
-    return <View />;
-  }
+function RenderItem(props) {
+  const { item, isLoading, errMess } = props;
 
-  return (
-    <Card style={styles.card}>
-      <Card.Title
-        title={item.titulo}
-        titleStyle={styles.titulo}
-        style={styles.cardTitle}
-      />
-      <Divider style={styles.lineaDivision} />
-      <Card.Content style={styles.contenido}>
-        <Text style={styles.descripcion}>{item.descripcion}</Text>
-        <Text style={styles.descripcion}>Tel: {item.telefono}</Text>
-        <Text style={styles.descripcion}>Email: {item.correo}</Text>
-      </Card.Content>
-    </Card>
-  );
+  if (isLoading) {
+    return <IndicadorActividad />;
+  } else if (errMess) {
+    return (
+      <View>
+        <Text>{errMess}</Text>
+      </View>
+    );
+  } else {
+    if (!item) {
+      return <View />;
+    }
+
+    return (
+      <Card style={styles.card}>
+        <Card.Title
+          title={item.titulo}
+          titleStyle={styles.titulo}
+          style={styles.cardTitle}
+        />
+        <Divider style={styles.lineaDivision} />
+        <Card.Content style={styles.contenido}>
+          <Text style={styles.descripcion}>{item.descripcion}</Text>
+          <Text style={styles.descripcion}>Tel: {item.telefono}</Text>
+          <Text style={styles.descripcion}>Email: {item.correo}</Text>
+        </Card.Content>
+      </Card>
+    );
+  }
 }
 
 class Contacto extends Component {
   render() {
     return (
       <ScrollView>
-        <RenderItem item={this.props.contacto.contacto[0]} />
+        <RenderItem
+          item={this.props.contacto.contacto[0]}
+          isLoading={this.props.contacto.isLoading}
+          errMess={this.props.contacto.errMess}
+        />
       </ScrollView>
     );
   }

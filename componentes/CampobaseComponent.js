@@ -36,12 +36,6 @@ import {
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-const mapStateToProps = (state) => {
-  return {
-    excursiones: state.excursiones,
-  };
-};
-
 const mapDispatchToProps = (dispatch) => ({
   fetchExcursiones: () => dispatch(fetchExcursiones()),
   fetchComentarios: () => dispatch(fetchComentarios()),
@@ -145,12 +139,7 @@ class Campobase extends Component {
             this.menuHeaderOptions("Calendario Gaztaroa", navigation)
           }
         >
-          {(props) => (
-            <Calendario
-              {...props}
-              excursiones={this.props.excursiones.excursiones}
-            />
-          )}
+          {(props) => <Calendario {...props} />}
         </Stack.Screen>
 
         <Stack.Screen
@@ -160,12 +149,7 @@ class Campobase extends Component {
             headerBackTitle: "Calendario",
           }}
         >
-          {(props) => (
-            <DetalleExcursion
-              {...props}
-              excursiones={this.props.excursiones.excursiones}
-            />
-          )}
+          {(props) => <DetalleExcursion {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     );
@@ -325,4 +309,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Campobase);
+export default connect(null, mapDispatchToProps)(Campobase);

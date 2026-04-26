@@ -5,6 +5,7 @@ import { cabeceras } from "./cabeceras";
 import { actividades } from "./actividades";
 import { contacto } from "./contacto";
 import { historia } from "./historia";
+import { favoritos } from "./favoritos";
 
 export const ConfigureStore = () => {
   const store = configureStore({
@@ -15,6 +16,7 @@ export const ConfigureStore = () => {
       actividades: actividades,
       contacto: contacto,
       historia: historia,
+      favoritos: favoritos,
     },
   });
 
