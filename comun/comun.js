@@ -1,3 +1,3 @@
-export const baseUrl = "http://192.168.1.26:3001/";
+export const baseUrl = "http://192.168.1.26:3001/"; //172.19.94.150
 export const colorGaztaroaOscuro = "#015afc";
 export const colorGaztaroaClaro = "#c2d3da";
